@@ -1,0 +1,59 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+
+    <title>view</title>
+  </head>
+  <body>
+    <input type="text" class="text" value="" placeholder="e-mail"></input>
+    <input type="button" class="btn" value="btn"></input>
+    
+  </body>
+
+  <script>
+    var Email = "";
+    console.log("Email:",Email);
+
+    $('.text').change(function(e){
+      console.log(e.target.value);
+      Email = e.target.value;
+    })
+
+    $('.btn').click(function(){
+      $.ajax({
+            url: `http://localhost:3000/users`,
+
+            method: "get",
+
+            data: Email,
+
+            dataType: "json",
+
+            success: function (data) {
+              Email = data;
+              console.log("get data: ",Email);
+            }
+          });
+    })
+
+    $('.btn').click(function(){
+      $.ajax({
+            url: `http://localhost:3000/users`,
+
+            method: "post",
+
+            data: {email:Email},
+
+            dataType: "json",
+
+            success: function (data) {
+              console.log(data);
+
+            }
+          });
+    })
+
+  </script>
+</html>
